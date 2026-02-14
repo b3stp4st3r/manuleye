@@ -2,6 +2,8 @@
 
 **Comprehensive OSINT Framework for Intelligence Gathering**
 
+**English** | [Русский](README_RU.md)
+
 MANUL-EYE is a powerful Open Source Intelligence (OSINT) framework designed for security researchers, penetration testers, and investigators. It provides a wide range of tools for gathering intelligence from various sources, extracting metadata, and performing network reconnaissance.
 
 ## ✨ Features
