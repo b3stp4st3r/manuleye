@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "manuleye"
+version = "1.0.1"
+description = "MANUL-EYE - Comprehensive OSINT Framework for Intelligence Gathering"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Daniil Pentium", email = "danyapentium@xyecoc.com"}
+]
+keywords = ["osint", "intelligence", "security", "metadata", "reconnaissance"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+    "Topic :: Internet",
+]
+
+dependencies = [
+    "requests>=2.31.0",
+    "rich>=13.0.0",
+    "pyfiglet>=0.8.0",
+    "Pillow>=10.0.0",
+    "phonenumbers>=8.13.0",
+    "pypdf>=3.0.0",
+    "mutagen>=1.47.0",
+    "python-docx>=1.0.0",
+    "openpyxl>=3.1.0",
+    "instaloader>=4.10.0",
+    "maigret>=0.4.0",
+    "holehe>=1.61",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/b3stp4st3r/manuleye"
+Repository = "https://github.com/b3stp4st3r/manuleye"
+Issues = "https://github.com/b3stp4st3r/manuleye/issues"
+
+[project.scripts]
+manuleye = "manuleye.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["manuleye*"]
+exclude = ["tests*"]
