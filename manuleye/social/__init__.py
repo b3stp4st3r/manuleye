@@ -1,5 +1,3 @@
-"""Social media OSINT modules."""
-
 from .telegram import telegram_search
 from .tiktok import tiktok_search
 from .vk import vk_search

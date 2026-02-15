@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "manuleye"
-version = "1.1.0"
+version = "1.2.0"
 description = "MANUL-EYE - Comprehensive OSINT Framework for Intelligence Gathering"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -41,6 +41,7 @@ dependencies = [
     "instaloader>=4.10.0",
     "maigret>=0.4.0",
     "holehe>=1.61",
+    "packaging>=23.0",
 ]
 
 [project.optional-dependencies]

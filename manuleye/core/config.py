@@ -1,11 +1,7 @@
-"""Configuration and constants for MANUL-EYE."""
-
 from rich.console import Console
 
-# Console instance
 console = Console()
 
-# Required Python libraries
 REQUIRED_LIBS = [
     "requests",
     "rich",
@@ -19,10 +15,8 @@ REQUIRED_LIBS = [
     "instaloader"
 ]
 
-# External command-line tools
 EXTERNAL_TOOLS = ["maigret", "holehe"]
 
-# API endpoints
 API_ENDPOINTS = {
     'ip_lookup': 'http://ip-api.com/json/',
 }

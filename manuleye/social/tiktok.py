@@ -1,20 +1,10 @@
-"""TikTok OSINT module."""
-
 import requests
 from rich.table import Table
 from manuleye.core import console
 
 
 def tiktok_search(username):
-    """
-    Search for TikTok user information.
-    
-    Args:
-        username: TikTok username (without @)
-    """
     console.print(f"[cyan][*] Searching TikTok for: @{username}...[/cyan]")
-    
-    # Remove @ if present
     username = username.lstrip('@')
     
     table = Table(title=f"TikTok: @{username}", border_style="orange3")
@@ -22,7 +12,6 @@ def tiktok_search(username):
     table.add_column("Value", style="green")
     
     try:
-        # Check if profile exists
         url = f"https://www.tiktok.com/@{username}"
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
@@ -35,13 +24,10 @@ def tiktok_search(username):
             
             content = response.text
             
-            # Try to extract basic info from HTML
-            # Note: TikTok uses heavy JavaScript, so full scraping requires selenium
             
             if '"uniqueId":"' in content:
                 table.add_row("Username", f"@{username}")
             
-            # Extract nickname if available
             if '"nickname":"' in content:
                 nick_start = content.find('"nickname":"') + 12
                 nick_end = content.find('"', nick_start)
@@ -49,7 +35,6 @@ def tiktok_search(username):
                     nickname = content[nick_start:nick_end]
                     table.add_row("Nickname", nickname)
             
-            # Extract follower count if available
             if '"followerCount":' in content:
                 fol_start = content.find('"followerCount":') + 16
                 fol_end = content.find(',', fol_start)
@@ -75,13 +60,6 @@ def tiktok_search(username):
 
 
 def tiktok_advanced_search(username):
-    """
-    Advanced TikTok search using third-party APIs.
-    Note: This is a placeholder for API-based search.
-    
-    Args:
-        username: TikTok username
-    """
     console.print("[yellow][!] Advanced TikTok search requires API access[/yellow]")
     console.print("[cyan]Options:[/cyan]")
     console.print("1. Use TikTok API (requires approval)")

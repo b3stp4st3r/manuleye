@@ -1,5 +1,3 @@
-"""Security testing modules."""
-
 import subprocess
 from rich.prompt import Prompt
 from manuleye.core import console
@@ -11,11 +9,9 @@ except ImportError:
 
 
 def sqlmap_scan():
-    """SQL injection testing."""
     target = Prompt.ask("Target URL (e.g. http://site.com/page.php?id=1)")
     console.print(f"[cyan][*] Starting SQLMap scan on: {target}...[/cyan]")
     console.print("[yellow][!] This may take a while...[/yellow]\n")
-    
     try:
         subprocess.run(f"sqlmap -u {target} --batch --banner", shell=True, timeout=600)
     except subprocess.TimeoutExpired:
@@ -30,10 +26,8 @@ def sqlmap_scan():
 
 
 def xss_scan():
-    """XSS vulnerability scanning."""
     target = Prompt.ask("Target URL")
     console.print(f"[cyan][*] Starting XSStrike scan on: {target}...[/cyan]\n")
-    
     try:
         subprocess.run(f"xsstrike -u {target}", shell=True, timeout=300)
     except subprocess.TimeoutExpired:
@@ -47,9 +41,7 @@ def xss_scan():
 
 
 def instagram_osint():
-    """Instagram OSINT."""
     username = Prompt.ask("Instagram Username")
-    
     if instaloader is None:
         console.print("[red][!] instaloader not installed. Run: pip install instaloader[/red]")
         input("\n[Press Enter]")

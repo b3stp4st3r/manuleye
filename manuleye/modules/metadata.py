@@ -1,5 +1,3 @@
-"""Metadata extraction modules."""
-
 import os
 import webbrowser
 from PIL import Image
@@ -37,7 +35,6 @@ import tarfile
 
 
 def convert_gps_to_decimal(gps_coords, ref):
-    """Convert GPS coordinates to decimal format."""
     try:
         degrees = float(gps_coords[0])
         minutes = float(gps_coords[1])
@@ -49,15 +46,12 @@ def convert_gps_to_decimal(gps_coords, ref):
     except:
         return None
 
-
 def parse_gps_info(gps_data):
-    """Parse GPS information from EXIF data."""
     try:
         lat = gps_data.get('GPSLatitude')
         lat_ref = gps_data.get('GPSLatitudeRef')
         lon = gps_data.get('GPSLongitude')
         lon_ref = gps_data.get('GPSLongitudeRef')
-        
         if lat and lon and lat_ref and lon_ref:
             latitude = convert_gps_to_decimal(lat, lat_ref)
             longitude = convert_gps_to_decimal(lon, lon_ref)
@@ -74,11 +68,9 @@ def parse_gps_info(gps_data):
 
 
 def exif_extractor():
-    """Extract EXIF data from images."""
     path = select_file()
     if not path:
         return
-    
     try:
         img = Image.open(path)
         info = img._getexif()
@@ -119,11 +111,9 @@ def exif_extractor():
 
 
 def pdf_metadata():
-    """Extract PDF metadata."""
     path = select_file()
     if not path:
         return
-    
     try:
         if pypdf is None:
             console.print("[red][!] pypdf not installed. Run: pip install pypdf[/red]")
@@ -164,11 +154,9 @@ def pdf_metadata():
 
 
 def video_metadata():
-    """Extract video metadata."""
     path = select_file()
     if not path:
         return
-    
     try:
         if mutagen is None:
             console.print("[red][!] mutagen not installed. Run: pip install mutagen[/red]")
@@ -195,11 +183,9 @@ def video_metadata():
 
 
 def audio_metadata():
-    """Extract audio metadata."""
     path = select_file()
     if not path:
         return
-    
     try:
         if mutagen is None:
             console.print("[red][!] mutagen not installed. Run: pip install mutagen[/red]")
@@ -228,11 +214,9 @@ def audio_metadata():
 
 
 def office_metadata():
-    """Extract Office document metadata."""
     path = select_file()
     if not path:
         return
-    
     try:
         table = Table(title=f"Office Metadata: {os.path.basename(path)}", border_style="orange3")
         table.add_column("Field", style="bold white")
@@ -279,11 +263,9 @@ def office_metadata():
 
 
 def archive_info():
-    """Show archive contents."""
     path = select_file()
     if not path:
         return
-    
     try:
         table = Table(title=f"Archive Contents: {os.path.basename(path)}", border_style="orange3")
         table.add_column("Filename", style="bold white")
@@ -321,11 +303,9 @@ def archive_info():
 
 
 def metadata_cleaner():
-    """Remove metadata from images."""
     path = select_file()
     if not path:
         return
-    
     try:
         img = Image.open(path)
         has_exif = bool(img._getexif())

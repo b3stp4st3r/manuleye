@@ -1,25 +1,15 @@
-"""VK (VKontakte) OSINT module."""
-
 import requests
 from rich.table import Table
 from manuleye.core import console
 
 
 def vk_search(username_or_id):
-    """
-    Search for VK user information.
-    
-    Args:
-        username_or_id: VK username (screen_name) or user ID
-    """
     console.print(f"[cyan][*] Searching VK for: {username_or_id}...[/cyan]")
-    
     table = Table(title=f"VK: {username_or_id}", border_style="orange3")
     table.add_column("Parameter", style="bold white")
     table.add_column("Value", style="green")
     
     try:
-        # Method 1: Check profile via web (no API key needed)
         url = f"https://vk.com/{username_or_id}"
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
@@ -29,7 +19,6 @@ def vk_search(username_or_id):
         if response.status_code == 200:
             content = response.text
             
-            # Check if profile exists
             if 'profile_deleted' in content or 'page_block_header' in content:
                 console.print(f"[yellow][!] Profile deleted or does not exist[/yellow]")
                 input("\n[Press Enter]")
@@ -38,7 +27,6 @@ def vk_search(username_or_id):
             table.add_row("Profile URL", url)
             table.add_row("Status", "✓ Profile exists")
             
-            # Extract user ID from page
             if 'profile?id=' in response.url:
                 user_id = response.url.split('id=')[1].split('&')[0]
                 table.add_row("User ID", user_id)
@@ -46,7 +34,6 @@ def vk_search(username_or_id):
                 user_id = response.url.split('/id')[1].split('?')[0]
                 table.add_row("User ID", user_id)
             
-            # Try to extract name from title
             if '<title>' in content:
                 title_start = content.find('<title>') + 7
                 title_end = content.find('</title>')
@@ -55,14 +42,12 @@ def vk_search(username_or_id):
                     name = title.split('|')[0].strip()
                     table.add_row("Name", name)
             
-            # Extract profile photo if available
             if 'profile_photo' in content or 'page_avatar' in content:
                 table.add_row("Has Photo", "✓ Yes")
             
             console.print(table)
             console.print(f"\n[cyan]Profile: https://vk.com/{username_or_id}[/cyan]")
             
-            # Suggest using VK API for more details
             console.print("\n[yellow][!] For detailed information, use VK API:[/yellow]")
             console.print("[cyan]1. Get API token from https://vk.com/dev[/cyan]")
             console.print("[cyan]2. Use users.get method[/cyan]")
@@ -81,13 +66,6 @@ def vk_search(username_or_id):
 
 
 def vk_api_search(user_id, access_token=None):
-    """
-    Search VK using official API (requires access token).
-    
-    Args:
-        user_id: VK user ID
-        access_token: VK API access token (optional)
-    """
     if not access_token:
         console.print("[yellow][!] VK API search requires access token[/yellow]")
         console.print("[cyan]To get access token:[/cyan]")
@@ -97,9 +75,7 @@ def vk_api_search(user_id, access_token=None):
         console.print("4. Use users.get, friends.get, photos.get methods")
         input("\n[Press Enter]")
         return
-    
     try:
-        # VK API request
         api_url = "https://api.vk.com/method/users.get"
         params = {
             'user_ids': user_id,

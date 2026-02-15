@@ -1,5 +1,3 @@
-"""Lookup and intelligence gathering modules."""
-
 import subprocess
 import requests
 import socket
@@ -11,7 +9,6 @@ from manuleye.core import console, validate_ip, API_ENDPOINTS
 
 
 def username_hunt():
-    """Search for username across 500+ platforms using Maigret."""
     target = Prompt.ask("Username")
     console.print(f"[cyan][*] Searching for: {target}...[/cyan]")
     try:
@@ -24,9 +21,7 @@ def username_hunt():
         console.print(f"[red][!] Error: {e}[/red]")
     input("\n[Press Enter]")
 
-
 def email_lookup():
-    """Check email presence on various services using Holehe."""
     target = Prompt.ask("Email")
     console.print(f"[cyan][*] Checking: {target}...[/cyan]")
     try:
@@ -39,12 +34,9 @@ def email_lookup():
         console.print(f"[red][!] Error: {e}[/red]")
     input("\n[Press Enter]")
 
-
 def phone_intel():
-    """Analyze phone number and extract carrier, location, timezone info."""
     number = Prompt.ask("Phone (e.g. +79991234567)")
     console.print(f"[*] Analyzing phone number: {number}...", style="cyan")
-    
     try:
         parsed_num = phonenumbers.parse(number)
         if not phonenumbers.is_valid_number(parsed_num):
@@ -78,9 +70,7 @@ def phone_intel():
 
 
 def ip_geolocate():
-    """Get detailed information about IP address."""
     ip = Prompt.ask("IP Address")
-    
     if not validate_ip(ip):
         console.print("[red][!] Invalid IP address format![/red]")
         input("\n[Press Enter]")
@@ -117,15 +107,12 @@ def ip_geolocate():
 
 
 def domain_lookup():
-    """Resolve domain to IP and gather information."""
     domain = Prompt.ask("Domain (e.g. example.com)")
     console.print(f"[cyan][*] Analyzing domain: {domain}...[/cyan]")
-    
     try:
         ip = socket.gethostbyname(domain)
         console.print(f"[green][+] Resolved IP: {ip}[/green]\n")
         
-        # Reuse IP geolocation
         response = requests.get(f"{API_ENDPOINTS['ip_lookup']}{ip}", timeout=10)
         data = response.json()
         

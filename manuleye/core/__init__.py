@@ -1,5 +1,3 @@
-"""Core utilities and configuration for MANUL-EYE."""
-
 from .config import *
 from .utils import *
 from .banner import *

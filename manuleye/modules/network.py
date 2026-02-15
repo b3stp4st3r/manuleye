@@ -1,5 +1,3 @@
-"""Network reconnaissance modules."""
-
 import os
 import socket
 import ssl
@@ -11,10 +9,8 @@ from manuleye.core import console
 
 
 def port_scanner():
-    """Scan for open ports."""
     target = Prompt.ask("Target IP/Domain")
     ports_input = Prompt.ask("Ports (e.g. 80,443 or 1-1000)", default="21,22,23,25,80,443,3306,3389,8080")
-    
     console.print(f"[cyan][*] Scanning {target}...[/cyan]\n")
     
     try:
@@ -45,10 +41,8 @@ def port_scanner():
 
 
 def traceroute():
-    """Trace route to destination."""
     target = Prompt.ask("Target IP/Domain")
     console.print(f"[cyan][*] Tracing route to {target}...[/cyan]\n")
-    
     try:
         if os.name == 'nt':
             subprocess.run(f"tracert {target}", shell=True)
@@ -61,11 +55,9 @@ def traceroute():
 
 
 def ping_sweep():
-    """Discover alive hosts."""
     network = Prompt.ask("Network (e.g. 192.168.1)", default="192.168.1")
     start = int(Prompt.ask("Start IP", default="1"))
     end = int(Prompt.ask("End IP", default="254"))
-    
     console.print(f"[cyan][*] Scanning {network}.{start}-{end}...[/cyan]\n")
     
     alive_hosts = []
@@ -85,10 +77,8 @@ def ping_sweep():
 
 
 def ssl_cert_info():
-    """Analyze SSL certificate."""
     target = Prompt.ask("Domain (e.g. google.com)")
     port = int(Prompt.ask("Port", default="443"))
-    
     console.print(f"[cyan][*] Fetching SSL certificate from {target}:{port}...[/cyan]\n")
     
     try:
@@ -120,9 +110,7 @@ def ssl_cert_info():
 
 
 def http_headers():
-    """Analyze HTTP headers."""
     target = Prompt.ask("URL (e.g. https://example.com)")
-    
     if not target.startswith('http'):
         target = 'https://' + target
     
@@ -142,7 +130,6 @@ def http_headers():
         
         console.print(table)
         
-        # Check security headers
         security_headers = [
             'Strict-Transport-Security',
             'Content-Security-Policy',
