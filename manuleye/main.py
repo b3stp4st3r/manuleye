@@ -16,10 +16,10 @@ from manuleye.modules.metadata import (
 from manuleye.modules.network import (
     port_scanner, traceroute, ping_sweep, ssl_cert_info, http_headers
 )
-from manuleye.modules.security import sqlmap_scan, xss_scan, instagram_osint
+from manuleye.modules.security import sqlmap_scan, xss_scan
 from manuleye.modules.utilities import create_paste, password_generator, hash_analyzer
 
-from manuleye.social import telegram_search, tiktok_search, vk_search
+from manuleye.social import telegram_search, tiktok_search, vk_search, instagram_search
 
 from manuleye.version_check import show_version_info
 
@@ -47,7 +47,7 @@ def show_main_menu():
     )
     menu_table.add_row(
         "[3] Phone Intel",
-        "[8] Instagram OSINT",
+        "[8] Instagram Search",
         "[13] Video Metadata"
     )
     menu_table.add_row(
@@ -126,7 +126,8 @@ def main():
             elif choice == "7":
                 xss_scan()
             elif choice == "8":
-                instagram_osint()
+                username = Prompt.ask("Instagram username")
+                instagram_search(username)
             
             elif choice == "10":
                 metadata_cleaner()

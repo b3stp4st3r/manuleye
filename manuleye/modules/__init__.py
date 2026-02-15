@@ -9,6 +9,6 @@ __all__ = [
     'exif_extractor', 'pdf_metadata', 'video_metadata', 'audio_metadata', 
     'office_metadata', 'archive_info', 'metadata_cleaner',
     'port_scanner', 'traceroute', 'ping_sweep', 'ssl_cert_info', 'http_headers',
-    'sqlmap_scan', 'xss_scan', 'instagram_osint',
+    'sqlmap_scan', 'xss_scan',
     'create_paste', 'password_generator', 'hash_analyzer'
 ]
